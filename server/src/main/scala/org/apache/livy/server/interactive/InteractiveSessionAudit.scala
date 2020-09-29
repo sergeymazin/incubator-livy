@@ -25,6 +25,6 @@ object InteractiveSessionAudit extends Logging {
              kind: String,
              code: String,
              startTime: Long): Unit = {
-    info(s"startTime: ${startTime}, proxyUser: $proxyUser, kind: ${kind}, code: ${code} ")
+    info(s"startTime: ${startTime}, proxyUser: $proxyUser, kind: ${kind}, code: ${code.replaceAll("\n", "\\n")} ")
   }
 }
