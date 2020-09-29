@@ -510,6 +510,7 @@ class InteractiveSession(
     recordActivity()
 
     val id = client.get.submitReplCode(content.code, content.kind.orNull).get
+    InteractiveSessionAudit.audit(this.proxyUser, content.code, System.currentTimeMillis())
     client.get.getReplJobResults(id, 1).get().statements(0)
   }
 
