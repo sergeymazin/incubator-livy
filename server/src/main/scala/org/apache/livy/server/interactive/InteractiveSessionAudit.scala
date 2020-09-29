@@ -21,11 +21,11 @@ import org.apache.livy.Logging
 
 object InteractiveSessionAudit extends Logging {
   def audit(
-             user: Option[String],
+             user: String,
              query: String,
              startTime: Long): Unit = {
     error(
-      s"user: $user ipAddress: query: ${query.replace('\n', ' ')} " +
+      s"user: $user query: ${query.replace('\n', ' ')} " +
         s"start time: ${startTime}")
   }
 }

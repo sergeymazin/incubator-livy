@@ -510,8 +510,10 @@ class InteractiveSession(
     recordActivity()
 
     val id = client.get.submitReplCode(content.code, content.kind.orNull).get
-    InteractiveSessionAudit.audit(this.proxyUser, content.code, System.currentTimeMillis())
-    client.get.getReplJobResults(id, 1).get().statements(0)
+    InteractiveSessionAudit.audit(this.proxyUser.getOrElse(""), content.code, System.currentTimeMillis())
+    val results = client.get.getReplJobResults(id, 1).get().statements(0)
+    InteractiveSessionAudit.audit(this.proxyUser.getOrElse(""), content.code, System.currentTimeMillis())
+    results
   }
 
   def cancelStatement(statementId: Int): Unit = {
