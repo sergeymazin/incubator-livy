@@ -21,10 +21,15 @@ import org.apache.livy.Logging
 
 object InteractiveSessionAudit extends Logging {
   def audit(
+             id: Int,
+             appId: String,
+             owner: String,
              proxyUser: String,
+             queue: String,
              kind: String,
-             code: String,
-             startTime: Long): Unit = {
-    debug(s"startTime: ${startTime}, proxyUser: $proxyUser, kind: ${kind}, code: ${code.replace('\n', ' ')}")
+             code: String): Unit = {
+    debug(s"Executing statement in interactive session $id [appId: $appId, " +
+      s"owner: $owner, proxyUser: $proxyUser, queue: $queue" +
+      s"kind: ${kind}] code: ${code.replace('\n', ' ')}")
   }
 }

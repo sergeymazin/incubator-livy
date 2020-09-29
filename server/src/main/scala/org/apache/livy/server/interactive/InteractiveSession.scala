@@ -510,7 +510,9 @@ class InteractiveSession(
     recordActivity()
 
     val id = client.get.submitReplCode(content.code, content.kind.orNull).get
-    InteractiveSessionAudit.audit(this.proxyUser.getOrElse(""), content.kind.orNull, content.code, System.currentTimeMillis())
+
+    InteractiveSessionAudit.audit(this.id, this.appId.orNull, this.owner, this.proxyUser.getOrElse(""),
+      this.livyConf.get("spark.yarn.queue"), content.kind.orNull, content.code)
     val results = client.get.getReplJobResults(id, 1).get().statements(0)
     results
   }
