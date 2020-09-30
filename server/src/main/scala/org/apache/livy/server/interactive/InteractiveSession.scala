@@ -513,8 +513,8 @@ class InteractiveSession(
 
     InteractiveSessionAudit.audit(this.id, this.appId.orNull, this.owner, this.proxyUser.getOrElse(""),
       this.livyConf.get("spark.yarn.queue"), content.kind.orNull, content.code)
-    val results = client.get.getReplJobResults(id, 1).get().statements(0)
-    results
+
+    client.get.getReplJobResults(id, 1).get().statements(0)
   }
 
   def cancelStatement(statementId: Int): Unit = {

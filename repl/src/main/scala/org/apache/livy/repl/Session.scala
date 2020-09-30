@@ -173,8 +173,6 @@ class Session(
       statement.compareAndTransit(StatementState.Cancelling, StatementState.Cancelled)
       statement.updateProgress(1.0)
       statement.completed = System.currentTimeMillis()
-      error(s"TEST TEST TEST statement: ${statement.code.replace('\n', ' ')} " +
-        s"time spent: ${Math.round((statement.completed - statement.started) / 1000)}")
     }(interpreterExecutor)
 
     statementId
